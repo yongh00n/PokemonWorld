@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "786609570646",
+    "firebase_url": "https://pokemon-world-150b2.firebaseio.com",
+    "project_id": "pokemon-world-150b2",
+    "storage_bucket": "pokemon-world-150b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786609570646:android:15bec61759e95ba97d4cf7",
+        "android_client_info": {
+          "package_name": "com.sandy.pokemonworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786609570646-cm9gpn103kdcpgp2fng125v260ut2oee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhly0bfYBQivRNE2HrHgWMw53CYQPjB88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786609570646-cm9gpn103kdcpgp2fng125v260ut2oee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

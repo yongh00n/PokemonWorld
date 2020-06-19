@@ -1,7 +1,8 @@
-package com.sandy.pokemonworld
+package com.sandy.pokemonworld.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sandy.pokemonworld.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
