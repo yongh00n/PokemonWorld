@@ -6,15 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_pokemons"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="always"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:overScrollMode="always"
-        />
+        app:layout_constraintTop_toBottomOf="@id/loading_indicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

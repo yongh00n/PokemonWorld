@@ -5,6 +5,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * https://pokeapi.co/docs/v2
+ */
 interface PokemonApi {
     companion object {
         const val DEFAULT_PAGE_SIZE = 20

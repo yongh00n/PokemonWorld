@@ -3,18 +3,12 @@ package com.sandy.pokemonworld.viewmodels
 import android.util.Log
 import androidx.arch.core.util.Function
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.DiffUtil
 import com.sandy.pokemonworld.network.PokemonApi
 import com.sandy.pokemonworld.persistence.daos.PokemonItemDao
 import com.sandy.pokemonworld.repositories.PokemonRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class PokemonListViewModel @ViewModelInject constructor(
@@ -27,9 +21,17 @@ class PokemonListViewModel @ViewModelInject constructor(
     }
 
     val isLoading = MutableLiveData<Boolean>(false)
+    val query = MutableLiveData<String>("")
+    private var queryTextChangeJob: Job? = null
 
-    val pokemonItems: LiveData<List<PokemonItemModel>> = Transformations.map(pokemonRepository.pokemonItems
-    ) { items -> items.map { PokemonItemModel(it.id, it.name)} }
+    val pokemonItems: LiveData<List<PokemonItemModel>> =
+        Transformations.switchMap(query) { name -> getPokemonItemsByName(name) }
+
+    private fun getPokemonItemsByName(name: String): LiveData<List<PokemonItemModel>> {
+        return Transformations.map(pokemonRepository.getPokemonItems(name)) {
+                items -> items.map { PokemonItemModel(it.id, it.name)}
+        }
+    }
 
     fun fetchPokemonItems(fetchMore: Boolean = false) {
         Log.d(TAG, "fetchPokemonItems fetchMore=$fetchMore isLoading=${isLoading.value}")
@@ -38,9 +40,9 @@ class PokemonListViewModel @ViewModelInject constructor(
             return
         }
 
-        val loadedItemCounts = pokemonRepository.pokemonItems.value?.size ?: 0
+        val loadedItemCounts = pokemonItems.value?.size ?: 0
         Log.d(TAG, "totalCount=${pokemonRepository.totalCount}")
-        if (pokemonRepository.totalCount <= loadedItemCounts) {
+        if (loadedItemCounts > 0 && pokemonRepository.totalCount <= loadedItemCounts) {
             Log.d(TAG, "fetchPokemonItems - already fetched all pokemons! :-)")
             return
         }
@@ -51,6 +53,20 @@ class PokemonListViewModel @ViewModelInject constructor(
             pokemonRepository.fetchPokemons(offset)
             withContext(Dispatchers.Main) {
                 isLoading.value = false
+            }
+        }
+    }
+
+    fun onQueryTextChange(text: String) {
+        queryTextChangeJob?.cancel()
+        queryTextChangeJob = CoroutineScope(Dispatchers.Main).launch {
+            delay(300)
+            Log.d(TAG, "###### perform search ${text}")
+
+            query.value = text
+
+            CoroutineScope(Dispatchers.IO).launch {
+                Log.d(TAG, "###### getPokemonItems by NAME = ${pokemonRepository.getPokemonItems(text)}")
             }
         }
     }

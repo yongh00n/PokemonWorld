@@ -2,5 +2,8 @@
 
     <string name="app_name">Pokemon World</string>
     <string name="page_title_main">Pokemon World</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search</string>
+
 
 </resources>

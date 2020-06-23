@@ -13,6 +13,9 @@ interface PokemonItemDao {
     @Query("SELECT * from pokemon_item_table ORDER BY id ASC")
     fun getPokemonItems(): LiveData<List<PokemonItem>>
 
+    @Query("SELECT * from pokemon_item_table WHERE name LIKE '%' || :name || '%' ORDER BY id ASC")
+    fun getPokemonItemsByName(name: String): LiveData<List<PokemonItem>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg pokemonItem: PokemonItem)
 

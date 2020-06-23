@@ -29,7 +29,16 @@ class PokemonRepository @Inject constructor(
         const val TAG = "PokemonRepository"
     }
 
-    val pokemonItems: LiveData<List<PokemonItem>> = pokemonItemDao.getPokemonItems()
+//    val pokemonItems: LiveData<List<PokemonItem>> = pokemonItemDao.getPokemonItems()
+
+    fun getPokemonItems(name: String = ""): LiveData<List<PokemonItem>> {
+        Log.d(TAG, "##### getPokemonItems name=${name}")
+        if (name.isEmpty()) {
+            return pokemonItemDao.getPokemonItems()
+        } else {
+            return pokemonItemDao.getPokemonItemsByName(name)
+        }
+    }
 
     val totalCount: Int
         get() { return pokemonApiStore.getTotalPokemonCount() }
