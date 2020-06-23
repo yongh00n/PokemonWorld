@@ -21,8 +21,6 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".activities.PokemonActivity">
-        </activity>
     </application>
 
 </manifest>
