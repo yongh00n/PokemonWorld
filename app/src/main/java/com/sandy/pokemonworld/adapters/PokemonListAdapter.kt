@@ -23,22 +23,11 @@ class PokemonListAdapter(context: Context)
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return when (viewType) {
-            VIEW_TYPE_LOADING -> LoadingViewHolder(inflater.inflate(R.layout.view_item_loading, parent, false))
-            else -> ItemViewHolder(inflater.inflate(R.layout.view_item_pokemon, parent, false))
-        }
+        return ItemViewHolder(inflater.inflate(R.layout.view_item_pokemon, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is ItemViewHolder) {
-            holder.bindTo(getItem(position))
-        } else if (holder is LoadingViewHolder) {
-
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return if (getItem(position).isLoadingItem) VIEW_TYPE_LOADING else VIEW_TYPE_DATA
+        (holder as ItemViewHolder).bindTo(getItem(position))
     }
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -51,17 +40,7 @@ class PokemonListAdapter(context: Context)
                 .into(imageView)
             nameView.text = model.name
             itemView.setOnClickListener {
-//                Log.d("XXXX", "clicked on ${model.name}")
             }
         }
-    }
-
-    inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var progresBar: ProgressBar = itemView.findViewById(R.id.progress_bar)
-    }
-
-    companion object {
-        const val VIEW_TYPE_DATA = 0
-        const val VIEW_TYPE_LOADING = 1
     }
 }
