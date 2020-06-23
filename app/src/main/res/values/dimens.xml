@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="default_gap">8dp</dimen>
+    <dimen name="default_gap_4x">32dp</dimen>
+</resources>
