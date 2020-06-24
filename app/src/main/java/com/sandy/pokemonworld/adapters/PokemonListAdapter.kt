@@ -8,10 +8,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sandy.pokemonworld.R
+import com.sandy.pokemonworld.fragments.PokemonListFragmentDirections
 import com.sandy.pokemonworld.viewmodels.PokemonItemModel
 
 class PokemonListAdapter(context: Context)
@@ -40,6 +44,8 @@ class PokemonListAdapter(context: Context)
                 .into(imageView)
             nameView.text = model.name
             itemView.setOnClickListener {
+                val action = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonFragment()
+                Navigation.findNavController(it).navigate(action)
             }
         }
     }
