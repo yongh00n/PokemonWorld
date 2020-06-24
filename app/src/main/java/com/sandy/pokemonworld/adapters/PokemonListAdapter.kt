@@ -44,7 +44,7 @@ class PokemonListAdapter(context: Context)
                 .into(imageView)
             nameView.text = model.name
             itemView.setOnClickListener {
-                val action = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonFragment()
+                val action = PokemonListFragmentDirections.actionPokemonListFragmentToPokemonFragment(model.id)
                 Navigation.findNavController(it).navigate(action)
             }
         }

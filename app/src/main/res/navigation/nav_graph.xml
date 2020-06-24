@@ -18,6 +18,10 @@
         android:id="@+id/pokemonFragment"
         android:name="com.sandy.pokemonworld.PokemonFragment"
         android:label="pokemon_fragment"
-        tools:layout="@layout/pokemon_fragment" />
+        tools:layout="@layout/fragment_pokemon" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

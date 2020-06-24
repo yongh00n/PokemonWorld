@@ -1,31 +1,33 @@
 package com.sandy.pokemonworld
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 
 class PokemonFragment : Fragment() {
 
     companion object {
-        fun newInstance() = PokemonFragment()
+        const val TAG = "PokemonFragment"
     }
 
-    private lateinit var viewModel: PokemonViewModel
+    private val viewModel: PokemonViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.pokemon_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_pokemon, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PokemonViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        val id = arguments?.getInt("id")
+        Log.d(TAG, "pokemon id=${id}")
     }
 
 }
