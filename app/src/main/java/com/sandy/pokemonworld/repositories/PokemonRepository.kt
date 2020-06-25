@@ -2,26 +2,14 @@ package com.sandy.pokemonworld.repositories
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.google.gson.Gson
-import com.sandy.pokemonworld.activities.MainActivity
 import com.sandy.pokemonworld.network.PokemonApi
-import com.sandy.pokemonworld.network.models.PokemonResponse
-import com.sandy.pokemonworld.network.models.PokemonsResponse
 import com.sandy.pokemonworld.persistence.daos.PokemonDao
 import com.sandy.pokemonworld.persistence.daos.PokemonItemDao
 import com.sandy.pokemonworld.persistence.entities.Pokemon
 import com.sandy.pokemonworld.persistence.entities.PokemonItem
 import com.sandy.pokemonworld.persistence.keyvalues.PokemonApiStore
 import com.sandy.pokemonworld.utils.ApiUtils
-import com.sandy.pokemonworld.viewmodels.PokemonItemModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
