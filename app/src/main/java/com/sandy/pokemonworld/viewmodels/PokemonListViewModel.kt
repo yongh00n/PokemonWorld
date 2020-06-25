@@ -13,11 +13,11 @@ import javax.inject.Inject
 
 class PokemonListViewModel @ViewModelInject constructor(
     private val pokemonRepository: PokemonRepository
-)
-    : ViewModel() {
+) : ViewModel() {
 
     companion object {
         const val TAG = "PokemonListModel"
+        const val DEBOUNCE_LIMIT_IN_MILLIS = 300L
     }
 
     val isLoading = MutableLiveData<Boolean>(false)
@@ -28,8 +28,8 @@ class PokemonListViewModel @ViewModelInject constructor(
         Transformations.switchMap(query) { name -> getPokemonItemsByName(name) }
 
     private fun getPokemonItemsByName(name: String): LiveData<List<PokemonItemModel>> {
-        return Transformations.map(pokemonRepository.getPokemonItems(name)) {
-                items -> items.map { PokemonItemModel(it.id, it.name)}
+        return Transformations.map(pokemonRepository.getPokemonItems(name)) { items ->
+            items.map { PokemonItemModel(it.id, it.name) }
         }
     }
 
@@ -60,14 +60,8 @@ class PokemonListViewModel @ViewModelInject constructor(
     fun onQueryTextChange(text: String) {
         queryTextChangeJob?.cancel()
         queryTextChangeJob = CoroutineScope(Dispatchers.Main).launch {
-            delay(300)
-            Log.d(TAG, "###### perform search ${text}")
-
+            delay(DEBOUNCE_LIMIT_IN_MILLIS)
             query.value = text
-
-            CoroutineScope(Dispatchers.IO).launch {
-                Log.d(TAG, "###### getPokemonItems by NAME = ${pokemonRepository.getPokemonItems(text)}")
-            }
         }
     }
 }

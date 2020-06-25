@@ -1,4 +1,7 @@
 <resources>
     <dimen name="default_gap">8dp</dimen>
+    <dimen name="default_gap_2x">16dp</dimen>
     <dimen name="default_gap_4x">32dp</dimen>
+
+    <dimen name="text_normal">14sp</dimen>
 </resources>

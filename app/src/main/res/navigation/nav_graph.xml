@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/pokemonFragment"
-        android:name="com.sandy.pokemonworld.PokemonFragment"
+        android:name="com.sandy.pokemonworld.fragments.PokemonFragment"
         android:label="pokemon_fragment"
         tools:layout="@layout/fragment_pokemon" >
         <argument

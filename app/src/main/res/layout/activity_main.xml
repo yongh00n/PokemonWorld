@@ -20,6 +20,4 @@
         app:navGraph="@navigation/nav_graph"
         />
 
-<!--    android:name="com.sandy.pokemonworld.fragments.PokemonListFragment"-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

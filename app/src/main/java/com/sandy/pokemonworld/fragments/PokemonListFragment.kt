@@ -9,10 +9,6 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sandy.pokemonworld.R
@@ -53,7 +49,8 @@ class PokemonListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "###### findNavController=${findNavController()}")
+
+        activity?.setTitle(R.string.app_name)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -108,6 +105,7 @@ class PokemonListFragment: Fragment() {
             val searchManager = activity.getSystemService(Context.SEARCH_SERVICE) as SearchManager
             val searchMenuItem = menu!!.findItem(R.id.search)
             val searchView = searchMenuItem.actionView as SearchView
+            viewModel.query.value = ""
             searchView.apply {
                 setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
                 isIconified = false
